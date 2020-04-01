@@ -31,12 +31,13 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
-    if @book.update()
-      redirect_to @book, notice: 'Book was successfully updated.'
+    if  @book.update(book_params)
+      # showに飛ぶ
+        redirect_to book_path(@book.id), notice: 'Book was successfully updated.'
     else
-      render :edit
-    end
+        render :edit
   end
+end
 
   # DELETE /books/1
   # DELETE /books/1.json
@@ -50,6 +51,7 @@ class BooksController < ApplicationController
     def set_book
       @book = Book.find(params[:id])
     end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def book_params
